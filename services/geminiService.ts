@@ -1,13 +1,10 @@
+
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import type { StoryPayload, Choice } from '../types';
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  throw new Error("API_KEY environment variable not set.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+// Fix: Per Gemini API guidelines, the API key must be sourced directly from process.env.API_KEY.
+// This also resolves the TypeScript error on import.meta.env.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const storySceneSchema = {
   type: Type.OBJECT,
